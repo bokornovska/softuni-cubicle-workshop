@@ -1,11 +1,16 @@
 const express = require('express');
 
+const app = express();
 const config = require('./config');
 
-const app = express();
+const setupViewEngine = require('./config/viewEngine');
+
+setupViewEngine(app);
+
+// require('./config/viewEngine')(app);
 
 app.get('/', (req, res) => {
-    res.send('Home page')
+    res.render('home')
 });
 
 app.listen(config.PORT, () => console.log(`Server is running on port ${config.PORT}`))
