@@ -1,19 +1,15 @@
-const cubeControler = require('./controlers/cubeControler');
+const router = require('express').Router();
 
+const cubeControler = require('./controlers/cubeControler');
+const homeControler = require('./controlers/homeControler');
 // const express = require('express');
 // const Router = express.Router;
 // const router = Router();
 
-const router = require('express').Router();
 
 
-router.get('/', (req, res) => {
-    res.render('index')
-});
-
-router.get('/about', (req,res) => {
-    res.render('about')
-});
+router.get('/', homeControler.getHomePage);
+router.get('/about', homeControler.getAboutPage);
 
 // app.get('/create', (req,res) => {
 //     res.render('create')
