@@ -10,11 +10,12 @@ const homeControler = require('./controlers/homeControler');
 
 router.get('/', homeControler.getHomePage);
 router.get('/about', homeControler.getAboutPage);
+router.post('/create', cubeControler.postCreateCube);
 
 // app.get('/create', (req,res) => {
 //     res.render('create')
 // });
 
-router.get('./create', cubeControler.getCreateCube)
+router.get('/create', cubeControler.getCreateCube)
 
 module.exports = router;
