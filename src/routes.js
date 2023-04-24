@@ -12,13 +12,14 @@ router.get('/', homeControler.getHomePage);
 router.get('/about', homeControler.getAboutPage);
 router.get('/404', homeControler.getErrorPage)
 
+
+router.get('/create', cubeControler.getCreateCube)
 router.post('/create', cubeControler.postCreateCube);
-router.get('/details/cubeId', cubeControler.getDetails);
+router.get('/details/:cubeId', cubeControler.getDetails);
 
 // app.get('/create', (req,res) => {
 //     res.render('create')
 // });
 
-router.get('/create', cubeControler.getCreateCube)
 
 module.exports = router;
