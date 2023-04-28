@@ -14,6 +14,8 @@ router.get('/create', cubeControler.getCreateCube)
 router.post('/create', cubeControler.postCreateCube);
 router.get('/details/:cubeId', cubeControler.getDetails);
 
+router.get('/cubes/:cubeId/attach', cubeControler.getattachAccessory)
+
 router.use('/accessory', accessoryControler);
 
 
