@@ -10,7 +10,13 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
     const { name, description, imageUrl } = req.body;
 
-    await Accessory.create({ name, description, imageUrl });
+    try {
+        
+        await Accessory.create({ name, description, imageUrl });
+    } catch (error) {
+        console.log(error.message);
+        return res.redirect('/404')
+    }
 
     res.redirect('/');
 });
