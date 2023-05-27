@@ -1,25 +1,28 @@
 const router = require('express').Router();
 
-const cubeControler = require('./controlers/cubeControler');
-const homeControler = require('./controlers/homeControler');
-const accessoryControler = require('./controlers/accessotyControler');
+const cubeController = require('./controllers/cubeController');
+const homeController = require('./controllers/homeController');
+const accessoryController = require('./controllers/accessoryController');
+const authController = require('./controllers/authController');
+const { isAuthenticated } = require('./middlewares/authMiddleware');
+const { handleRequests } = require('./utils/requestUtils');
 
+router.get('/', homeController.getHomePage);
+router.get('/about', homeController.getAboutPage);
+router.get('/404', homeController.getErrorPage);
 
-router.get('/', homeControler.getHomePage);
-router.get('/about', homeControler.getAboutPage);
-router.get('/404', homeControler.getErrorPage)
+router.use('/', authController);
 
+router.get('/cubes/create', isAuthenticated, cubeController.getCreateCube);
+router.post('/cubes/create', isAuthenticated, cubeController.postCreateCube);
+router.get('/cubes/:cubeId/details', cubeController.getDetails);
+router.get('/cubes/:cubeId/edit', isAuthenticated, cubeController.getEditCube);
+router.post('/cubes/:cubeId/edit', cubeController.postEditCube);
+router.get('/cubes/:cubeId/delete', cubeController.getDeleteCube);
+router.post('/cubes/:cubeId/delete', cubeController.postDeleteCube);
+router.get('/cubes/:cubeId/attach', cubeController.getAttachAccessory);
+router.post('/cubes/:cubeId/attach', cubeController.postAttachAccessory);
 
-router.get('/cubes/create', cubeControler.getCreateCube)
-router.post('/cubes/create', cubeControler.postCreateCube);
-router.get('/cubes/:cubeId/details', cubeControler.getDetails);
-
-router.get('/cubes/:cubeId/attach', cubeControler.getattachAccessory);
-router.post('/cubes/:cubeId/attach', cubeControler.postAttachAccessory);
-
-
-router.use('/accessories', accessoryControler);
-
-
+router.use('/accessories', accessoryController);
 
 module.exports = router;

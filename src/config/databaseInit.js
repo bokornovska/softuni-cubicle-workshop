@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
+const config = require('./index');
 
-const config = require('./index')
-async function databaseInit(){
+async function initDatabase() {
+    mongoose.set('strictQuery', false);
 
     await mongoose.connect(config.DB_URI);
 
-    console.log('DB connected')
-
+    console.log('DB connected');
 }
 
-module.exports = databaseInit;
+module.exports = initDatabase;
